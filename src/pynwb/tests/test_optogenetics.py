@@ -34,7 +34,9 @@ class TestFrankLabOptogeneticsEpochsTable(TestCase):
         stimulus = mock_TimeSeries()
         nwbfile.add_stimulus(stimulus)
 
-        camera_model = DeviceModel(name="ndx2000", manufacturer="sony", model_number="ndx2000")
+        camera_model = DeviceModel(
+            name="ndx2000", manufacturer="sony", model_number="ndx2000"
+        )
         nwbfile.add_device_model(camera_model)
 
         camera1 = CameraDevice(
@@ -135,7 +137,9 @@ class TestFrankLabOptogeneticsEpochsTable(TestCase):
             volume_in_uL=0.45,
             injection_date="1970-01-01T00:00:00+00:00",
         )
-        optogenetic_virus_injections = OptogeneticVirusInjections(viral_vector_injections=[virus_injection])
+        optogenetic_virus_injections = OptogeneticVirusInjections(
+            viral_vector_injections=[virus_injection]
+        )
 
         effector = Effector(
             name="effector",
@@ -194,7 +198,9 @@ class TestFrankLabOptogeneticsEpochsTable(TestCase):
             spatial_filter_lockout_period_in_samples=10,
             # below is an example of a single rectangular spatial filter region defined by the pixel coordinates of the
             # four corners
-            spatial_filter_region_node_coordinates_in_pixels=(((260, 920), (260, 800), (800, 1050), (800, 920)),),
+            spatial_filter_region_node_coordinates_in_pixels=(
+                ((260, 920), (260, 800), (800, 1050), (800, 920)),
+            ),
             spatial_filter_cameras=[camera1, camera2],
             spatial_filter_cameras_cm_per_pixel=[0.3, 0.18],
             ripple_filter_on=True,
@@ -237,22 +243,39 @@ class TestFrankLabOptogeneticsEpochsTable(TestCase):
             assert read_epochs[0, "convenience_code"] == "a1"
             assert read_epochs[0, "epoch_type"] == "sleep"
             assert read_epochs[0, "theta_filter_on"]
-            assert read_epochs[0, "theta_filter_lockout_period_in_samples"] == 10
+            assert (
+                read_epochs[0, "theta_filter_lockout_period_in_samples"] == 10
+            )
             assert read_epochs[0, "theta_filter_phase_in_deg"] == 180.0
             assert read_epochs[0, "theta_filter_reference_ntrode"] == 1
             assert read_epochs[0, "spatial_filter_on"]
-            assert read_epochs[0, "spatial_filter_lockout_period_in_samples"] == 10
+            assert (
+                read_epochs[0, "spatial_filter_lockout_period_in_samples"] == 10
+            )
             assert np.array_equal(
-                read_epochs[0, "spatial_filter_region_node_coordinates_in_pixels"],
+                read_epochs[
+                    0, "spatial_filter_region_node_coordinates_in_pixels"
+                ],
                 np.array((((260, 920), (260, 800), (800, 1050), (800, 920)),)),
             )
-            assert read_epochs[0, "spatial_filter_cameras"] == [read_camera1, read_camera2]
-            assert all(read_epochs[0, "spatial_filter_cameras_cm_per_pixel"] == [0.3, 0.18])
+            assert read_epochs[0, "spatial_filter_cameras"] == [
+                read_camera1,
+                read_camera2,
+            ]
+            assert all(
+                read_epochs[0, "spatial_filter_cameras_cm_per_pixel"]
+                == [0.3, 0.18]
+            )
             assert read_epochs[0, "ripple_filter_on"]
-            assert read_epochs[0, "ripple_filter_lockout_period_in_samples"] == 10
+            assert (
+                read_epochs[0, "ripple_filter_lockout_period_in_samples"] == 10
+            )
             assert read_epochs[0, "ripple_filter_threshold_sd"] == 5.0
             assert read_epochs[0, "ripple_filter_num_above_threshold"] == 4
             assert read_epochs[0, "speed_filter_on"]
             assert read_epochs[0, "speed_filter_threshold_in_cm_per_s"] == 10.0
             assert read_epochs[0, "speed_filter_on_above_threshold"]
-            assert read_epochs[0, "stimulus_signal"].object_id == stimulus.object_id
+            assert (
+                read_epochs[0, "stimulus_signal"].object_id
+                == stimulus.object_id
+            )

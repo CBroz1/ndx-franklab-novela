@@ -36,25 +36,63 @@ class TestHeaderDevice(TestCase):
 
     def test_checkNodeCorrectValue_true(self):
         self.assertEqual(self.header_device.name, "HeaderDevice1")
-        self.assertEqual(self.header_device.headstage_serial, "Sample headstage_serial")
-        self.assertEqual(self.header_device.headstage_smart_ref_on, "Sample headstage_smart_ref_on")
-        self.assertEqual(self.header_device.realtime_mode, "Sample realtime_mode")
-        self.assertEqual(self.header_device.headstage_auto_settle_on, "Sample headstage_auto_settle_on")
-        self.assertEqual(self.header_device.timestamp_at_creation, "Sample timestamp_at_creation")
-        self.assertEqual(self.header_device.controller_firmware_version, "Sample controller_firmware_version")
-        self.assertEqual(self.header_device.controller_serial, "Sample controller_serial")
-        self.assertEqual(self.header_device.save_displayed_chan_only, "Sample save_displayed_chan_only")
-        self.assertEqual(self.header_device.headstage_firmware_version, "Sample headstage_firmware_version")
+        self.assertEqual(
+            self.header_device.headstage_serial, "Sample headstage_serial"
+        )
+        self.assertEqual(
+            self.header_device.headstage_smart_ref_on,
+            "Sample headstage_smart_ref_on",
+        )
+        self.assertEqual(
+            self.header_device.realtime_mode, "Sample realtime_mode"
+        )
+        self.assertEqual(
+            self.header_device.headstage_auto_settle_on,
+            "Sample headstage_auto_settle_on",
+        )
+        self.assertEqual(
+            self.header_device.timestamp_at_creation,
+            "Sample timestamp_at_creation",
+        )
+        self.assertEqual(
+            self.header_device.controller_firmware_version,
+            "Sample controller_firmware_version",
+        )
+        self.assertEqual(
+            self.header_device.controller_serial, "Sample controller_serial"
+        )
+        self.assertEqual(
+            self.header_device.save_displayed_chan_only,
+            "Sample save_displayed_chan_only",
+        )
+        self.assertEqual(
+            self.header_device.headstage_firmware_version,
+            "Sample headstage_firmware_version",
+        )
         self.assertEqual(self.header_device.qt_version, "Sample qt_version")
         self.assertEqual(self.header_device.compile_date, "Sample compile_date")
         self.assertEqual(self.header_device.compile_time, "Sample compile_time")
         self.assertEqual(self.header_device.file_prefix, "Sample file_prefix")
-        self.assertEqual(self.header_device.headstage_gyro_sensor_on, "Sample headstage_gyro_sensor_on")
-        self.assertEqual(self.header_device.headstage_mag_sensor_on, "Sample headstage_mag_sensor_on")
-        self.assertEqual(self.header_device.trodes_version, "Sample trodes_version")
-        self.assertEqual(self.header_device.headstage_accel_sensor_on, "Sample headstage_accel_sensor_on")
+        self.assertEqual(
+            self.header_device.headstage_gyro_sensor_on,
+            "Sample headstage_gyro_sensor_on",
+        )
+        self.assertEqual(
+            self.header_device.headstage_mag_sensor_on,
+            "Sample headstage_mag_sensor_on",
+        )
+        self.assertEqual(
+            self.header_device.trodes_version, "Sample trodes_version"
+        )
+        self.assertEqual(
+            self.header_device.headstage_accel_sensor_on,
+            "Sample headstage_accel_sensor_on",
+        )
         self.assertEqual(self.header_device.commit_head, "Sample commit_head")
-        self.assertEqual(self.header_device.system_time_at_creation, "Sample system_time_at_creation")
+        self.assertEqual(
+            self.header_device.system_time_at_creation,
+            "Sample system_time_at_creation",
+        )
         self.assertEqual(self.header_device.file_path, "Sample file_path")
 
     def test_checkNodeCorrectType_true(self):
@@ -64,10 +102,14 @@ class TestHeaderDevice(TestCase):
         self.assertIsInstance(self.header_device.realtime_mode, str)
         self.assertIsInstance(self.header_device.headstage_auto_settle_on, str)
         self.assertIsInstance(self.header_device.timestamp_at_creation, str)
-        self.assertIsInstance(self.header_device.controller_firmware_version, str)
+        self.assertIsInstance(
+            self.header_device.controller_firmware_version, str
+        )
         self.assertIsInstance(self.header_device.controller_serial, str)
         self.assertIsInstance(self.header_device.save_displayed_chan_only, str)
-        self.assertIsInstance(self.header_device.headstage_firmware_version, str)
+        self.assertIsInstance(
+            self.header_device.headstage_firmware_version, str
+        )
         self.assertIsInstance(self.header_device.qt_version, str)
         self.assertIsInstance(self.header_device.compile_date, str)
         self.assertIsInstance(self.header_device.compile_time, str)

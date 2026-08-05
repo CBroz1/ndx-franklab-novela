@@ -38,10 +38,24 @@ def main():
         neurodata_type_inc="NWBDataInterface",
         doc="electrode in the probe",
         attributes=[
-            NWBAttributeSpec(name="name", doc="name of the electrode", dtype="text"),
-            NWBAttributeSpec(name="rel_x", doc="the rel_x value of the electrode", dtype="float"),
-            NWBAttributeSpec(name="rel_y", doc="the rel_y value of the electrode", dtype="float"),
-            NWBAttributeSpec(name="rel_z", doc="the rel_z value of the electrode", dtype="float"),
+            NWBAttributeSpec(
+                name="name", doc="name of the electrode", dtype="text"
+            ),
+            NWBAttributeSpec(
+                name="rel_x",
+                doc="the rel_x value of the electrode",
+                dtype="float",
+            ),
+            NWBAttributeSpec(
+                name="rel_y",
+                doc="the rel_y value of the electrode",
+                dtype="float",
+            ),
+            NWBAttributeSpec(
+                name="rel_z",
+                doc="the rel_z value of the electrode",
+                dtype="float",
+            ),
         ],
     )
 
@@ -49,9 +63,17 @@ def main():
         neurodata_type_def="Shank",
         neurodata_type_inc="NWBDataInterface",
         doc="shank in the probe",
-        groups=[NWBGroupSpec(neurodata_type_inc="ShanksElectrode", doc="electrode in the probe", quantity="*")],
+        groups=[
+            NWBGroupSpec(
+                neurodata_type_inc="ShanksElectrode",
+                doc="electrode in the probe",
+                quantity="*",
+            )
+        ],
         attributes=[
-            NWBAttributeSpec(name="name", doc="name of the shank", dtype="text"),
+            NWBAttributeSpec(
+                name="name", doc="name of the shank", dtype="text"
+            ),
         ],
     )
 
@@ -59,12 +81,30 @@ def main():
         doc="A custom Probes interface",
         neurodata_type_def="Probe",
         neurodata_type_inc="Device",
-        groups=[NWBGroupSpec(neurodata_type_inc="Shank", doc="shank in the probe", quantity="*")],
+        groups=[
+            NWBGroupSpec(
+                neurodata_type_inc="Shank",
+                doc="shank in the probe",
+                quantity="*",
+            )
+        ],
         attributes=[
-            NWBAttributeSpec(name="id", doc="unique id of the probe", dtype="int"),
-            NWBAttributeSpec(name="probe_type", doc="type of the probe", dtype="text"),
-            NWBAttributeSpec(name="units", doc="units in probe, acceptable values um or mm", dtype="text"),
-            NWBAttributeSpec(name="probe_description", doc="description of the probe", dtype="text"),
+            NWBAttributeSpec(
+                name="id", doc="unique id of the probe", dtype="int"
+            ),
+            NWBAttributeSpec(
+                name="probe_type", doc="type of the probe", dtype="text"
+            ),
+            NWBAttributeSpec(
+                name="units",
+                doc="units in probe, acceptable values um or mm",
+                dtype="text",
+            ),
+            NWBAttributeSpec(
+                name="probe_description",
+                doc="description of the probe",
+                dtype="text",
+            ),
             NWBAttributeSpec(
                 name="contact_side_numbering",
                 doc=(
@@ -76,7 +116,11 @@ def main():
                 dtype="bool",
                 required=False,
             ),
-            NWBAttributeSpec(name="contact_size", doc="value of contact size in float", dtype="float"),
+            NWBAttributeSpec(
+                name="contact_size",
+                doc="value of contact size in float",
+                dtype="float",
+            ),
         ],
     )
 
@@ -85,9 +129,18 @@ def main():
         neurodata_type_def="DataAcqDevice",
         neurodata_type_inc="Device",
         attributes=[
-            NWBAttributeSpec(name="system", doc="system of device", dtype="text"),
-            NWBAttributeSpec(name="amplifier", doc="amplifier", dtype="text", required=False),
-            NWBAttributeSpec(name="adc_circuit", doc="adc_circuit", dtype="text", required=False),
+            NWBAttributeSpec(
+                name="system", doc="system of device", dtype="text"
+            ),
+            NWBAttributeSpec(
+                name="amplifier", doc="amplifier", dtype="text", required=False
+            ),
+            NWBAttributeSpec(
+                name="adc_circuit",
+                doc="adc_circuit",
+                dtype="text",
+                required=False,
+            ),
         ],
     )
 
@@ -96,8 +149,12 @@ def main():
         neurodata_type_inc="Device",
         doc="A custom Device interface",
         attributes=[
-            NWBAttributeSpec(name="meters_per_pixel", doc="meters per pixel", dtype="float"),
-            NWBAttributeSpec(name="camera_name", doc="name of the camera", dtype="text"),
+            NWBAttributeSpec(
+                name="meters_per_pixel", doc="meters per pixel", dtype="float"
+            ),
+            NWBAttributeSpec(
+                name="camera_name", doc="name of the camera", dtype="text"
+            ),
             NWBAttributeSpec(name="lens", doc="lens info", dtype="text"),
             NWBAttributeSpec(
                 name="frame_rate",
@@ -113,9 +170,17 @@ def main():
         neurodata_type_inc="NWBDataInterface",
         doc="content of files linked with nwb",
         attributes=[
-            NWBAttributeSpec(name="description", doc="description of file", dtype="text"),
-            NWBAttributeSpec(name="content", doc="content of file", dtype="text"),
-            NWBAttributeSpec(name="task_epochs", doc="epochs this task belongs to", dtype="text"),
+            NWBAttributeSpec(
+                name="description", doc="description of file", dtype="text"
+            ),
+            NWBAttributeSpec(
+                name="content", doc="content of file", dtype="text"
+            ),
+            NWBAttributeSpec(
+                name="task_epochs",
+                doc="epochs this task belongs to",
+                dtype="text",
+            ),
         ],
     )
 
@@ -124,35 +189,71 @@ def main():
         neurodata_type_def="HeaderDevice",
         neurodata_type_inc="Device",
         attributes=[
-            NWBAttributeSpec(name="headstage_serial", doc="headstage_serial from global configuration", dtype="text"),
             NWBAttributeSpec(
-                name="headstage_smart_ref_on", doc="headstage_smart_ref_on from global configuration", dtype="text"
-            ),
-            NWBAttributeSpec(name="realtime_mode", doc="realtime_mode from global configuration", dtype="text"),
-            NWBAttributeSpec(
-                name="headstage_auto_settle_on", doc="headstage_auto_settle_on from global configuration", dtype="text"
+                name="headstage_serial",
+                doc="headstage_serial from global configuration",
+                dtype="text",
             ),
             NWBAttributeSpec(
-                name="timestamp_at_creation", doc="timestamp_at_creation from global configuration", dtype="text"
+                name="headstage_smart_ref_on",
+                doc="headstage_smart_ref_on from global configuration",
+                dtype="text",
+            ),
+            NWBAttributeSpec(
+                name="realtime_mode",
+                doc="realtime_mode from global configuration",
+                dtype="text",
+            ),
+            NWBAttributeSpec(
+                name="headstage_auto_settle_on",
+                doc="headstage_auto_settle_on from global configuration",
+                dtype="text",
+            ),
+            NWBAttributeSpec(
+                name="timestamp_at_creation",
+                doc="timestamp_at_creation from global configuration",
+                dtype="text",
             ),
             NWBAttributeSpec(
                 name="controller_firmware_version",
                 doc="conntroller_firmware_version from global configuration",
                 dtype="text",
             ),
-            NWBAttributeSpec(name="controller_serial", doc="controller_serial from global configuration", dtype="text"),
             NWBAttributeSpec(
-                name="save_displayed_chan_only", doc="save_displayed_chan_only from global configuration", dtype="text"
+                name="controller_serial",
+                doc="controller_serial from global configuration",
+                dtype="text",
+            ),
+            NWBAttributeSpec(
+                name="save_displayed_chan_only",
+                doc="save_displayed_chan_only from global configuration",
+                dtype="text",
             ),
             NWBAttributeSpec(
                 name="headstage_firmware_version",
                 doc="headstage_firmware_version from global configuration",
                 dtype="text",
             ),
-            NWBAttributeSpec(name="qt_version", doc="qt_version_version from global configuration", dtype="text"),
-            NWBAttributeSpec(name="compile_date", doc="compile_date_version from global configuration", dtype="text"),
-            NWBAttributeSpec(name="compile_time", doc="compile_time_version from global configuration", dtype="text"),
-            NWBAttributeSpec(name="file_prefix", doc="file_prefix_version from global configuration", dtype="text"),
+            NWBAttributeSpec(
+                name="qt_version",
+                doc="qt_version_version from global configuration",
+                dtype="text",
+            ),
+            NWBAttributeSpec(
+                name="compile_date",
+                doc="compile_date_version from global configuration",
+                dtype="text",
+            ),
+            NWBAttributeSpec(
+                name="compile_time",
+                doc="compile_time_version from global configuration",
+                dtype="text",
+            ),
+            NWBAttributeSpec(
+                name="file_prefix",
+                doc="file_prefix_version from global configuration",
+                dtype="text",
+            ),
             NWBAttributeSpec(
                 name="headstage_gyro_sensor_on",
                 doc="headstage_gyro_sensor_on_version from global configuration",
@@ -164,18 +265,30 @@ def main():
                 dtype="text",
             ),
             NWBAttributeSpec(
-                name="trodes_version", doc="trodes_versionversion from global configuration", dtype="text"
+                name="trodes_version",
+                doc="trodes_versionversion from global configuration",
+                dtype="text",
             ),
             NWBAttributeSpec(
                 name="headstage_accel_sensor_on",
                 doc="headstage_accel_sensor_on from global configuration",
                 dtype="text",
             ),
-            NWBAttributeSpec(name="commit_head", doc="commit_head from global configuration", dtype="text"),
             NWBAttributeSpec(
-                name="system_time_at_creation", doc="system_time_at_creation from global configuration", dtype="text"
+                name="commit_head",
+                doc="commit_head from global configuration",
+                dtype="text",
             ),
-            NWBAttributeSpec(name="file_path", doc="file_path from global configuration", dtype="text"),
+            NWBAttributeSpec(
+                name="system_time_at_creation",
+                doc="system_time_at_creation from global configuration",
+                dtype="text",
+            ),
+            NWBAttributeSpec(
+                name="file_path",
+                doc="file_path from global configuration",
+                dtype="text",
+            ),
         ],
     )
 
@@ -184,11 +297,23 @@ def main():
         neurodata_type_inc="ElectrodeGroup",
         doc="Custom nwb ElectrodeGroup",
         attributes=[
-            NWBAttributeSpec(name="targeted_location", doc="predicted location", dtype="text"),
-            NWBAttributeSpec(name="targeted_x", doc="predicted x coordinates", dtype="float"),
-            NWBAttributeSpec(name="targeted_y", doc="predicted y coordinates", dtype="float"),
-            NWBAttributeSpec(name="targeted_z", doc="predicted z coordinates", dtype="float"),
-            NWBAttributeSpec(name="units", doc="units of fields, acceptable values: um or mm", dtype="text"),
+            NWBAttributeSpec(
+                name="targeted_location", doc="predicted location", dtype="text"
+            ),
+            NWBAttributeSpec(
+                name="targeted_x", doc="predicted x coordinates", dtype="float"
+            ),
+            NWBAttributeSpec(
+                name="targeted_y", doc="predicted y coordinates", dtype="float"
+            ),
+            NWBAttributeSpec(
+                name="targeted_z", doc="predicted z coordinates", dtype="float"
+            ),
+            NWBAttributeSpec(
+                name="units",
+                doc="units of fields, acceptable values: um or mm",
+                dtype="text",
+            ),
         ],
     )
 
@@ -316,13 +441,17 @@ def main():
             NWBDatasetSpec(
                 name="spatial_filter_cameras_index",
                 neurodata_type_inc="VectorIndex",
-                doc=("Index column for `spatial_filter_cameras` so that each epoch can have multiple cameras."),
+                doc=(
+                    "Index column for `spatial_filter_cameras` so that each epoch can have multiple cameras."
+                ),
                 quantity="?",
             ),
             NWBDatasetSpec(
                 name="spatial_filter_cameras",
                 neurodata_type_inc="VectorData",
-                doc=("References to camera objects used for the spatial filter."),
+                doc=(
+                    "References to camera objects used for the spatial filter."
+                ),
                 dtype=NWBRefSpec(
                     target_type="CameraDevice",
                     reftype="object",
@@ -403,14 +532,18 @@ def main():
             NWBDatasetSpec(
                 name="speed_filter_threshold_in_cm_per_s",
                 neurodata_type_inc="VectorData",
-                doc=("If the speed filter was used, the threshold for detecting a fast/slow animal, in cm/s."),
+                doc=(
+                    "If the speed filter was used, the threshold for detecting a fast/slow animal, in cm/s."
+                ),
                 dtype="float",
                 quantity="?",
             ),
             NWBDatasetSpec(
                 name="speed_filter_on_above_threshold",
                 neurodata_type_inc="VectorData",
-                doc=("If the speed filter was used, True if active when speed above threshold."),
+                doc=(
+                    "If the speed filter was used, True if active when speed above threshold."
+                ),
                 dtype="bool",
                 quantity="?",
             ),
@@ -442,7 +575,9 @@ def main():
     ]
 
     # export the spec to yaml files in the spec folder
-    output_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "spec"))
+    output_dir = os.path.abspath(
+        os.path.join(os.path.dirname(__file__), "..", "..", "spec")
+    )
     export_spec(ns_builder, new_data_types, output_dir)
 
 

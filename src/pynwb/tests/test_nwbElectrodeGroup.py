@@ -40,9 +40,15 @@ class TestNwbElectrodeGroup(unittest.TestCase):
         self.assertEqual(nwb_electrode_group.location, location)
         self.assertEqual(nwb_electrode_group.device, device)
         np.testing.assert_array_equal(
-            nwb_electrode_group.position, np.array((1.0, 2.0, 3.0), dtype=[("x", "<f8"), ("y", "<f8"), ("z", "<f8")])
+            nwb_electrode_group.position,
+            np.array(
+                (1.0, 2.0, 3.0),
+                dtype=[("x", "<f8"), ("y", "<f8"), ("z", "<f8")],
+            ),
         )
-        self.assertEqual(nwb_electrode_group.targeted_location, targeted_location)
+        self.assertEqual(
+            nwb_electrode_group.targeted_location, targeted_location
+        )
         self.assertEqual(nwb_electrode_group.targeted_x, targeted_x)
         self.assertEqual(nwb_electrode_group.targeted_y, targeted_y)
         self.assertEqual(nwb_electrode_group.targeted_z, targeted_z)

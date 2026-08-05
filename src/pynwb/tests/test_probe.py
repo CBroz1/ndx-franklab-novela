@@ -7,7 +7,9 @@ from ndx_franklab_novela import Probe, ShanksElectrode, Shank
 class TestShanksElectrode(unittest.TestCase):
 
     def test_shanks_electrode_successfully_created(self):
-        shanks_electrode = ShanksElectrode(name="0", rel_x=1.0, rel_y=2.0, rel_z=3.0)
+        shanks_electrode = ShanksElectrode(
+            name="0", rel_x=1.0, rel_y=2.0, rel_z=3.0
+        )
 
         self.assertIsInstance(shanks_electrode, ShanksElectrode)
 
@@ -49,7 +51,10 @@ class TestShank(unittest.TestCase):
         self.assertIsInstance(shank.shanks_electrodes["1"].rel_x, float)
 
         self.assertEqual(shank.name, "0")
-        self.assertEqual(shank.shanks_electrodes, {"1": mock_shanks_electrode_1, "2": mock_shanks_electrode_2})
+        self.assertEqual(
+            shank.shanks_electrodes,
+            {"1": mock_shanks_electrode_1, "2": mock_shanks_electrode_2},
+        )
         self.assertEqual(shank.shanks_electrodes["1"].rel_x, 1.0)
 
 

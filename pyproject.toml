@@ -42,6 +42,20 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
+# Minimum runtime requirements, pinned for the "minimum" CI matrix legs (see
+# .github/workflows/run_all_tests.yml). Deliberately an extra rather than a
+# dependency group: these pin the project's own runtime dependencies, so they
+# must be installable alongside the package itself as `.[min-reqs]`.
+min-reqs = [
+    "pynwb==2.8.3",
+    "hdmf==4.0.0",
+    "ndx-optogenetics==0.2.0",
+]
+
+# Development dependencies, declared as PEP 735 dependency groups. These are
+# not part of the published package's metadata; install them with
+# `pip install --group <name>` (requires pip>=25.1).
+[dependency-groups]
 test = [
     "coverage>=7.5.4",
     "pytest>=8.2.2",
@@ -59,14 +73,8 @@ dev = [
     "codespell>=2.3.0",
     "pre-commit>=3.5.0",
     "ruff>=0.4.10",
-    "ndx-franklab-novela[docs,test]",
-]
-
-# minimum requirements of project dependencies for testing (see .github/workflows/run_all_tests.yml)
-min-reqs = [
-    "pynwb==2.8.3",
-    "hdmf==4.0.0",
-    "ndx-optogenetics==0.2.0",
+    {include-group = "docs"},
+    {include-group = "test"},
 ]
 
 [project.urls]
@@ -121,16 +129,21 @@ exclude_lines = [
 ]
 
 [tool.black]
-line-length = 120
-preview = true
+line-length = 80
 exclude = ".git|.mypy_cache|.tox|.venv|venv|.ipynb_checkpoints|_build/|dist/|__pypackages__|.ipynb|docs/"
 
 [tool.ruff]
 lint.select = ["E", "F", "T100", "T201", "T203", "C901"]
+# E501 (line-too-long) is left to black, which owns line length. Ruff only
+# reports E501 for lines black cannot split -- overwhelmingly the `doc=`
+# string literals in src/spec/create_extension_spec.py, whose values are
+# emitted verbatim into spec/*.yaml. Rewrapping those by hand would risk
+# altering the published schema documentation, so they are left alone.
+lint.ignore = ["E501"]
 exclude = [
   "docs/source/conf.py",
 ]
-line-length = 120
+line-length = 80
 
 [tool.ruff.lint.per-file-ignores]
 "src/spec/create_extension_spec.py" = ["T201"]

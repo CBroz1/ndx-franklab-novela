@@ -60,12 +60,17 @@ class TestNWBFileReading(TestCase):
         self.assertTrue(os.path.exists("header_device.nwb"))
         with pynwb.NWBHDF5IO("header_device.nwb", "r") as nwb_file_handler:
             nwb_file = nwb_file_handler.read()
-            self.assertEqual(nwb_file.devices["header_device"].commit_head, header_device.commit_head)
+            self.assertEqual(
+                nwb_file.devices["header_device"].commit_head,
+                header_device.commit_head,
+            )
 
         self.delete_nwb("header_device")
 
     def test_read_nwb_probe_successfully(self):
-        shanks_electrode = ShanksElectrode(name="electrode_shank", rel_x=1.0, rel_y=2.0, rel_z=3.0)
+        shanks_electrode = ShanksElectrode(
+            name="electrode_shank", rel_x=1.0, rel_y=2.0, rel_z=3.0
+        )
         shank = Shank(name="shank")
         shank.add_shanks_electrode(shanks_electrode)
         probe = Probe(
@@ -85,7 +90,9 @@ class TestNWBFileReading(TestCase):
         nwb_file_handler.close()
 
         self.assertTrue(os.path.exists("probe.nwb"))
-        with pynwb.NWBHDF5IO("probe.nwb", "r", load_namespaces=True) as nwb_file_handler:
+        with pynwb.NWBHDF5IO(
+            "probe.nwb", "r", load_namespaces=True
+        ) as nwb_file_handler:
             nwb_file = nwb_file_handler.read()
             self.assertContainerEqual(nwb_file.devices["probe"], probe)
 
@@ -93,7 +100,10 @@ class TestNWBFileReading(TestCase):
 
     def test_read_nwb_data_acq_device_successfully(self):
         data_acq_device = DataAcqDevice(
-            name="DataAcqDevice1", system="System1", amplifier="Amplifier1", adc_circuit="adc_circuit1"
+            name="DataAcqDevice1",
+            system="System1",
+            amplifier="Amplifier1",
+            adc_circuit="adc_circuit1",
         )
         self.nwb_file_content.add_device(data_acq_device)
 
@@ -102,14 +112,20 @@ class TestNWBFileReading(TestCase):
         nwb_file_handler.close()
 
         self.assertTrue(os.path.exists("data_acq_device.nwb"))
-        with pynwb.NWBHDF5IO("data_acq_device.nwb", "r", load_namespaces=True) as nwb_file_handler:
+        with pynwb.NWBHDF5IO(
+            "data_acq_device.nwb", "r", load_namespaces=True
+        ) as nwb_file_handler:
             nwb_file = nwb_file_handler.read()
-            self.assertContainerEqual(nwb_file.devices["DataAcqDevice1"], data_acq_device)
+            self.assertContainerEqual(
+                nwb_file.devices["DataAcqDevice1"], data_acq_device
+            )
 
         self.delete_nwb("data_acq_device")
 
     def test_read_nwb_camera_device_successfully(self):
-        camera_model = DeviceModel(name="ndx2000", manufacturer="sony", model_number="ndx2000")
+        camera_model = DeviceModel(
+            name="ndx2000", manufacturer="sony", model_number="ndx2000"
+        )
         camera_device = CameraDevice(
             name="CameraDevice1",
             meters_per_pixel=0.20,
@@ -125,9 +141,13 @@ class TestNWBFileReading(TestCase):
         nwb_file_handler.close()
 
         self.assertTrue(os.path.exists("camera_device.nwb"))
-        with pynwb.NWBHDF5IO("camera_device.nwb", "r", load_namespaces=True) as nwb_file_handler:
+        with pynwb.NWBHDF5IO(
+            "camera_device.nwb", "r", load_namespaces=True
+        ) as nwb_file_handler:
             nwb_file = nwb_file_handler.read()
-            self.assertContainerEqual(nwb_file.devices["CameraDevice1"], camera_device)
+            self.assertContainerEqual(
+                nwb_file.devices["CameraDevice1"], camera_device
+            )
 
         self.delete_nwb("camera_device")
 
@@ -152,11 +172,18 @@ class TestNWBFileReading(TestCase):
         nwb_file_handler.close()
 
         self.assertTrue(os.path.exists("nwb_electrode_group.nwb"))
-        with pynwb.NWBHDF5IO("nwb_electrode_group.nwb", "r") as nwb_file_handler:
+        with pynwb.NWBHDF5IO(
+            "nwb_electrode_group.nwb", "r"
+        ) as nwb_file_handler:
             nwb_file = nwb_file_handler.read()
-            self.assertEqual(nwb_file.electrode_groups["nwb_electrode_group_0"].name, nwb_electrode_group.name)
             self.assertEqual(
-                nwb_file.electrode_groups["nwb_electrode_group_0"].targeted_location,
+                nwb_file.electrode_groups["nwb_electrode_group_0"].name,
+                nwb_electrode_group.name,
+            )
+            self.assertEqual(
+                nwb_file.electrode_groups[
+                    "nwb_electrode_group_0"
+                ].targeted_location,
                 nwb_electrode_group.targeted_location,
             )
 
@@ -164,11 +191,19 @@ class TestNWBFileReading(TestCase):
 
     def test_read_nwb_associated_files_successfully(self):
         associated_files = AssociatedFiles(
-            name="file1", description="description of file1", content="1 2 3 content of file test", task_epochs="1, 2"
+            name="file1",
+            description="description of file1",
+            content="1 2 3 content of file test",
+            task_epochs="1, 2",
         )
-        pm = ProcessingModule(name="associated_files", description="description_of_associaed_files")
+        pm = ProcessingModule(
+            name="associated_files",
+            description="description_of_associaed_files",
+        )
         self.nwb_file_content.add_processing_module(pm)
-        self.nwb_file_content.processing["associated_files"].add(associated_files)
+        self.nwb_file_content.processing["associated_files"].add(
+            associated_files
+        )
 
         nwb_file_handler = NWBHDF5IO("associated_files.nwb", mode="w")
         nwb_file_handler.write(self.nwb_file_content)
@@ -182,7 +217,9 @@ class TestNWBFileReading(TestCase):
             self.assertIsInstance(af1, AssociatedFiles)
             self.assertEqual("file1", af1.name)
             self.assertEqual("description of file1", af1.fields["description"])
-            self.assertEqual("1 2 3 content of file test", af1.fields["content"])
+            self.assertEqual(
+                "1 2 3 content of file test", af1.fields["content"]
+            )
             self.assertEqual("1, 2", af1.fields["task_epochs"])
 
         self.delete_nwb("associated_files")

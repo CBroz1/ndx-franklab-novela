@@ -9,11 +9,17 @@ import ndx_optogenetics  # noqa: F401
 
 # Get path to the namespace.yaml file with the expected location when installed not in editable mode
 __location_of_this_file = files(__name__)
-__spec_path = __location_of_this_file / "spec" / "ndx-franklab-novela.namespace.yaml"
+__spec_path = (
+    __location_of_this_file / "spec" / "ndx-franklab-novela.namespace.yaml"
+)
 
 # If that path does not exist, we are likely running in editable mode. Use the local path instead
 if not os.path.exists(__spec_path):
-    __spec_path = __location_of_this_file.parent.parent.parent / "spec" / "ndx-franklab-novela.namespace.yaml"
+    __spec_path = (
+        __location_of_this_file.parent.parent.parent
+        / "spec"
+        / "ndx-franklab-novela.namespace.yaml"
+    )
 
 # Load the namespace
 load_namespaces(str(__spec_path))
@@ -21,7 +27,9 @@ load_namespaces(str(__spec_path))
 AssociatedFiles = get_class("AssociatedFiles", "ndx-franklab-novela")
 CameraDevice = get_class("CameraDevice", "ndx-franklab-novela")
 DataAcqDevice = get_class("DataAcqDevice", "ndx-franklab-novela")
-FrankLabOptogeneticEpochsTable = get_class("FrankLabOptogeneticEpochsTable", "ndx-franklab-novela")
+FrankLabOptogeneticEpochsTable = get_class(
+    "FrankLabOptogeneticEpochsTable", "ndx-franklab-novela"
+)
 HeaderDevice = get_class("HeaderDevice", "ndx-franklab-novela")
 NwbElectrodeGroup = get_class("NwbElectrodeGroup", "ndx-franklab-novela")
 Probe = get_class("Probe", "ndx-franklab-novela")

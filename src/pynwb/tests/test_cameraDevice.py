@@ -8,7 +8,9 @@ class TestCameraDevice(TestCase):
 
     def test_cameraDevice_created_successfully(self):
 
-        model = DeviceModel(name="ndx2000", manufacturer="sony", model_number="ndx2000")
+        model = DeviceModel(
+            name="ndx2000", manufacturer="sony", model_number="ndx2000"
+        )
         cam_1 = CameraDevice(
             name="1",
             description="Camera used for tracking running",
