@@ -36,7 +36,10 @@ keywords = [
 ]
 dependencies = [
     "pynwb>=3.1.3",
-    "hdmf>=4.0.0,<5",
+    # 4.1.2 is the true floor: pynwb 3.1.3 requires hdmf>=4.1.2 and
+    # ndx-optogenetics 0.3.0 requires hdmf>=4.1.0, so anything lower is
+    # unreachable.
+    "hdmf>=4.1.2,<5",
     "ndx-optogenetics==0.3.0",
 ]
 
@@ -44,11 +47,13 @@ dependencies = [
 # Minimum runtime requirements, pinned for the "minimum" CI matrix legs (see
 # .github/workflows/run_all_tests.yml). Deliberately an extra rather than a
 # dependency group: these pin the project's own runtime dependencies, so they
-# must be installable alongside the package itself as `.[min-reqs]`.
+# must be installable alongside the package itself as `.[min-reqs]`. Because an
+# extra is additive rather than overriding, every pin here must satisfy the
+# corresponding floor in `dependencies` above -- keep the two in sync.
 min-reqs = [
-    "pynwb==2.8.3",
-    "hdmf==4.0.0",
-    "ndx-optogenetics==0.2.0",
+    "pynwb==3.1.3",
+    "hdmf==4.1.2",
+    "ndx-optogenetics==0.3.0",
 ]
 
 # Development dependencies, declared as PEP 735 dependency groups. These are

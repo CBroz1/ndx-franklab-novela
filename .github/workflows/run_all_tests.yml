@@ -12,6 +12,12 @@ jobs:
   run-all-tests:
     name: ${{ matrix.name }}
     runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        # PowerShell only propagates the last command's exit code, so a failed
+        # pip install silently falls through to `pytest`. bash (-e by default
+        # on runners) fails the step at the first failing command instead.
+        shell: bash
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}-${{ matrix.name }}
       cancel-in-progress: true
