@@ -1,0 +1,22 @@
+# Frozen pre-upgrade stack used to write the backward-compatibility fixtures.
+#
+# CI installs these into a throwaway environment, runs make_fixtures.py there,
+# and then runs the test suite against the fixtures with the *current* stack.
+# That separation is the whole point: fixtures written and read by the same
+# versions would only prove round-tripping, not that the upgraded stack can
+# still read files produced by the old one.
+#
+# Pin deliberately and change rarely -- this is the "what spyglass has on
+# disk" reference point, not a floor to keep current. It is intentionally
+# separate from the [min-reqs] extra in pyproject.toml, which tracks the
+# lowest supported versions and will move with the pynwb 4 / hdmf 6 upgrade.
+#
+# NOTE: CI installs the working tree (`.`) alongside these. That works only
+# while the working tree still supports pynwb 3.x. Once this package requires
+# pynwb >= 4, swap that for the last released version that did not --
+# `ndx-franklab-novela==0.2.4` from PyPI -- so the fixtures keep representing
+# files written before the upgrade.
+pynwb==3.1.3
+hdmf==4.3.1
+ndx-optogenetics==0.3.0
+ndx-ophys-devices==0.3.1

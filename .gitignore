@@ -1,6 +1,11 @@
 # output NWB files
 *.nwb
 
+# backward-compatibility fixtures and the pinned old-stack environment that
+# writes them; both are rebuilt on demand by src/pynwb/tests/make_fixtures.py
+src/pynwb/tests/fixtures/
+.fixture-env/
+
 # generated docs
 docs/source/_format_auto_docs
 

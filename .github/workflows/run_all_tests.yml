@@ -68,6 +68,21 @@ jobs:
           python -m pip list
           python -m pip check
 
+      - name: Generate backward-compatibility fixtures (pre-upgrade stack)
+        run: |
+          # Built in a throwaway environment pinned to the OLD stack, then read
+          # back by the test suite running on the stack installed above. Same
+          # env for both would only prove round-tripping. See
+          # src/pynwb/tests/fixture-stack.txt.
+          python -m venv .fixture-env
+          FIXTURE_PY="$PWD/.fixture-env/bin/python"
+          # Windows runners put the interpreter under Scripts/ instead.
+          [ -x "$FIXTURE_PY" ] || FIXTURE_PY="$PWD/.fixture-env/Scripts/python.exe"
+          "$FIXTURE_PY" -m pip install --upgrade pip
+          "$FIXTURE_PY" -m pip install -r src/pynwb/tests/fixture-stack.txt .
+          "$FIXTURE_PY" -m pip check
+          "$FIXTURE_PY" src/pynwb/tests/make_fixtures.py
+
       - name: Run tests
         run: |
           pytest -v
